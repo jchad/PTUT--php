@@ -6,7 +6,7 @@ $um=new UserManager();
 $unityHash = $um->anti_injection_login($_POST["myform_hash"]);
 $phpHash = "hashcode"; // same code in here as in your Unity game
 
-$nick = $um->anti_injection_login($_POST["myform_nick"]); //I use that function to protect against SQL injection
+$nick = $um->anti_injection_login($_POST["myform_nick"]);
 $pass = $um->anti_injection_login_senha($_POST["myform_pass"]);
 /*
 you can also use this:
@@ -26,7 +26,9 @@ if(!$nick || !$pass){
       if($pass!=$password){
         echo 'Mot de passe incorect';
       }else{
-        echo 'Connexion réussie';
+        $um->setStatut($nick);
+        $infos=$um->getInfos($nick);
+        echo ''.$infos['Statut'].';'.$infos['pseudo'].';'.$infos['dateInscription'].'';
       }
     }
   }

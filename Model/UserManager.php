@@ -25,10 +25,22 @@
     public function getPass($Login){
       $sql = 'Select mdp from joueur where pseudo = :identifiant';
       $req= $this->executerRequete($sql, array('identifiant' => $Login));
-      $results = $req->fetch();
+      $results = $req->fetch(PDO::FETCH_ASSOC);
       $req->closeCursor();
       return $results['mdp'];
     }
+    public function setStatut($Login){
+      $sql = 'Update joueur set Statut=1 where pseudo = :identifiant';
+      $req= $this->executerRequete($sql, array('identifiant' => $Login));
+      $req->closeCursor();
+    }
 
+    public function getInfos($Login){
+      $sql = 'Select Statut, noJoueur, pseudo, dateInscription, tempsdeJeu, niveau from joueur where pseudo = :identifiant';
+      $req= $this->executerRequete($sql, array('identifiant' => $Login));
+      $results = $req->fetch(PDO::FETCH_ASSOC);
+      $req->closeCursor();
+      return $results;
+    }
   }
 ?>
