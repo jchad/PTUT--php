@@ -20,6 +20,15 @@
       $req->closeCursor();
       return $results['mdp'];
     }
+
+    public function getSalt($Login){
+      $sql = 'Select Salt from joueur where pseudo = :identifiant';
+      $req= $this->executerRequete($sql, array('identifiant' => $Login));
+      $results = $req->fetch(PDO::FETCH_ASSOC);
+      $req->closeCursor();
+      return $results['salt'];
+    }
+
     public function setStatut($Login, $Param){
       $sql = 'Update joueur set Statut= :param where pseudo = :identifiant';
       $req= $this->executerRequete($sql, array('identifiant' => $Login, 'param' => $Param));

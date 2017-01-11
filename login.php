@@ -3,7 +3,7 @@ require("Model/Model.php");
 require("Model/UserManager.php");
 $um=new UserManager();
 // =============================================================================
-$unityHash = $um->anti_injection_login($_POST["myform_hash"]);
+$unityHash = $um->anti_injection($_POST["myform_hash"]);
 $phpHash = "hashcode"; // same code in here as in your Unity game
 
 $nick = $um->anti_injection($_POST["myform_nick"]);
@@ -14,6 +14,8 @@ you can also use this:
 $nick = $_POST["myform_nick"];
 $pass = $_POST["myform_pass"];
 */
+
+/*verif que l'utilisateur n'est pas déjà connecté*/
 if(!$nick || !$pass){
   echo "Login or password cant be empty.";
 }else{
@@ -27,6 +29,7 @@ if(!$nick || !$pass){
       if($pass!=$password){
         echo 'Mot de passe incorect';
       }else{
+        $_SESSION['Login']=$nick;
         $um->setStatut($nick,1);
         $infos=$um->getInfos($nick);
         echo ''.$infos['Statut'].';'.$infos['pseudo'].';'.$infos['dateInscription'].'';

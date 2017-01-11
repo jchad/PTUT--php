@@ -11,9 +11,9 @@ $pass = $um->anti_injection($_POST["myform_pass"]);
 $passbis = $um->anti_injection($_POST["myform_passbis"]);
 $mail = $um->anti_injection($_POST["myform_mail"]);
 
-
+/*vérifier taille chaine + utilsateur non existant*/
 if(!$nick || !$pass || !$passbis || !$mail){
-  echo "Login or password cant be empty.";
+  echo "At least one field is empty.";
 }else{
   if ($unityHash != $phpHash){
     echo "HASH code is diferent from your game, you infidel.";

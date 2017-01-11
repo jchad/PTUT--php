@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 03 Décembre 2016 à 16:24
+-- Généré le :  Lun 05 Décembre 2016 à 08:17
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.19
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `ptut`
 --
+CREATE DATABASE IF NOT EXISTS `ptut` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ptut`;
 
 -- --------------------------------------------------------
 
