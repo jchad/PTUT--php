@@ -26,7 +26,7 @@
       $req= $this->executerRequete($sql, array('identifiant' => $Login));
       $results = $req->fetch(PDO::FETCH_ASSOC);
       $req->closeCursor();
-      return $results['salt'];
+      return $results['Salt'];
     }
 
     public function setStatut($Login, $Param){

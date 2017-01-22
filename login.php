@@ -9,7 +9,7 @@ $phpHash = "hashcode"; // same code in here as in your Unity game
 $nick = $um->anti_injection($_POST["myform_nick"]);
 $pass = $um->anti_injection($_POST["myform_pass"]);
 $pass = trim($pass);
-$salt = getSalt($nick);
+$salt = $um->getSalt($nick);
 /*
 you can also use this:
 $nick = $_POST["myform_nick"];
