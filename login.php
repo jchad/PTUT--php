@@ -8,7 +8,8 @@ $phpHash = "hashcode"; // same code in here as in your Unity game
 
 $nick = $um->anti_injection($_POST["myform_nick"]);
 $pass = $um->anti_injection($_POST["myform_pass"]);
-$pass = md5(trim($pass));
+$pass = trim($pass);
+$salt = getSalt($nick);
 /*
 you can also use this:
 $nick = $_POST["myform_nick"];
@@ -26,7 +27,7 @@ if(!$nick || !$pass){
     if($password==NULL){
       $erreur='Utilisateur inexistant';
     }else{
-      if($pass!=$password){
+      if(crypt($pass,$salt)!=$password){
         echo 'Mot de passe incorect';
       }else{
         $_SESSION['Login']=$nick;
