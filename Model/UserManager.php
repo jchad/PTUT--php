@@ -35,6 +35,14 @@
       $req->closeCursor();
     }
 
+    public function getStatut($Login){
+      $sql = 'Select Statut from joueur where pseudo = :identifiant';
+      $req= $this->executerRequete($sql, array('identifiant' => $Login));
+      $results = $req->fetch(PDO::FETCH_ASSOC);
+      $req->closeCursor();
+      return $results;
+    }
+
     public function getInfos($Login){
       $sql = 'Select Statut, noJoueur, pseudo, dateInscription, tempsdeJeu, niveau from joueur where pseudo = :identifiant';
       $req= $this->executerRequete($sql, array('identifiant' => $Login));

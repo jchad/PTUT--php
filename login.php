@@ -18,22 +18,23 @@ $pass = $_POST["myform_pass"];
 
 /*verif que l'utilisateur n'est pas déjà connecté*/
 if(!$nick || !$pass){
-  echo "Login or password cant be empty.";
+  echo '{"Statut":"0","message":"Login or password cant be empty."}';
 }else{
   if ($unityHash != $phpHash){
-    echo "HASH code is diferent from your game, you infidel.";
+    echo '{"Statut":"0","message":"HASH code is diferent from your game, you infidel."}';
   }else{
     $password=$um->getPass($nick);
     if($password==NULL){
-      $erreur='Utilisateur inexistant';
+      echo '{"Statut":"0","message":"Utilisateur non existant"}';
     }else{
       if(crypt($pass,$salt)!=$password){
-        echo 'Mot de passe incorect';
+        echo '{"Statut":"0","message":"Mot de pass incorect"}';
       }else{
         $_SESSION['Login']=$nick;
         $um->setStatut($nick,1);
         $infos=$um->getInfos($nick);
-        echo ''.$infos['Statut'].';'.$infos['pseudo'].';'.$infos['dateInscription'].'';
+        $temp = json_encode($infos);
+        echo $temp;
       }
     }
   }
