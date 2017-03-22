@@ -13,21 +13,21 @@ $mail = $um->anti_injection($_POST["myform_mail"]);
 
 /*vérifier taille chaine + utilsateur non existant*/
 if(!$nick || !$pass || !$passbis || !$mail){
-  echo "At least one field is empty.";
+  echo '{"Statut":"0","message":"At least one field is empty."}';
 }else{
   if ($unityHash != $phpHash){
-    echo "HASH code is diferent from your game, you infidel.";
+    echo '{"Statut":"0","message":"HASH code is diferent from your game, you infidel."}';
   }else{
     if($pass!=$passbis){
-      echo "Les deux mots de passe ne sont pas indentiques.";
+      echo '{"Statut":"0","message":"Les deux mots de passe ne sont pas indentiques."}';
     }else{
       $salt=mb_strimwidth(md5(rand()),0,4);
       $pass=crypt((trim($pass)),$salt);
       if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
         $um->createUser($nick, $pass, $salt, $mail);
-        echo "1";
+        echo '{"Statut":"1"}';
       }else{
-        echo "Adresse mail non valide";
+        echo '{"Statut":"0","message":"Adresse mail non valide."}';
       }
     }
   }
